@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Topbar } from "../../components/topbar/topbar";
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Topbar],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {}
+export class Home { }

@@ -1,0 +1,26 @@
+<nav class="navbar px-3 px-md-5 py-2 py-lg-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Bridge X</a>
+        <div class="d-flex align-items-center">
+            <button class="btn btn-primary mx-2">
+                Get in contact
+            </button>
+            <button type="button" class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle navigation menu"
+                [attr.aria-expanded]="isMenuOpen">
+                <span class="menu-icon" [class.open]="isMenuOpen">
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="overlay-backdrop" [class.open]="isMenuOpen" (click)="closeMenu()"></div>
+
+<div class="overlay-menu" [class.open]="isMenuOpen">
+    <div class="overlay-links">
+        <a routerLink="/" (click)="closeMenu()">Home</a>
+        <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+    </div>
+</div>
