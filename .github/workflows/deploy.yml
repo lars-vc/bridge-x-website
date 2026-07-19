@@ -25,12 +25,12 @@ jobs:
         run: npm run build
 
       - name: Copy .htaccess into build output
-        run: cp .htaccess ./dist/my-app/browser/.htaccess
+        run: cp .htaccess ./dist/bridge-x-website/browser/.htaccess
 
       - name: Deploy dist to deploy branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/my-app/browser
+          publish_dir: ./dist/bridge-x-website/browser
           publish_branch: deploy
           force_orphan: true
