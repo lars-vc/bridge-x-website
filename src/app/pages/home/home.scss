@@ -44,7 +44,7 @@
 }
 
 .x-text {
-    color: var(--dark);
+    color: var(--dark2);
     font-weight: 700;
     opacity: 0;
     transform: translateY(8px);
@@ -58,7 +58,7 @@
 }
 
 .x-arrow {
-    color: var(--blue);
+    color: var(--silver);
     opacity: 0;
     transform: translateY(8px);
     transition: opacity 0.45s cubic-bezier(.2, .9, .2, 1), transform 0.45s cubic-bezier(.2, .9, .2, 1);

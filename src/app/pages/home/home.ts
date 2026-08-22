@@ -31,6 +31,38 @@ export class Home implements AfterViewInit, OnDestroy {
     this.updateAmountAndNodes(true);
   }
 
+  private cssToRgba(cssColor: string, alpha = 1): string {
+    const s = (cssColor || '').trim();
+    if (!s) return `rgba(161,161,170,${alpha})`; // fallback to silver
+
+    // hex #RRGGBB or #RGB
+    if (s[0] === '#') {
+      let hex = s.slice(1);
+      if (hex.length === 3) {
+        hex = hex.split('').map(c => c + c).join('');
+      }
+      if (hex.length === 6) {
+        const r = parseInt(hex.slice(0, 2), 16);
+        const g = parseInt(hex.slice(2, 4), 16);
+        const b = parseInt(hex.slice(4, 6), 16);
+        return `rgba(${r},${g},${b},${alpha})`;
+      }
+    }
+
+    // rgb() or rgba()
+    const rgbMatch = s.match(/rgba?\(([^)]+)\)/);
+    if (rgbMatch) {
+      const parts = rgbMatch[1].split(',').map(p => p.trim());
+      const r = parts[0] || '161';
+      const g = parts[1] || '161';
+      const b = parts[2] || '170';
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    // named color or other - return as-is (canvas accepts names), but alpha can't be applied
+    return s;
+  }
+
   private computeAmount(): number {
     const minDim = Math.min(this.width || window.innerWidth, this.height || window.innerHeight);
     const calculated = Math.round(minDim * 0.10); // scale factor: 0.25 * min dimension
@@ -142,6 +174,7 @@ export class Home implements AfterViewInit, OnDestroy {
       }
     });
 
+    const cssNode = getComputedStyle(document.documentElement).getPropertyValue('--node-color') || '';
     // connections
     for (let i = 0; i < this.nodes.length; i++) {
       const a = this.nodes[i];
@@ -155,17 +188,21 @@ export class Home implements AfterViewInit, OnDestroy {
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
           const pulse = 0.08 + (Math.sin(time / 800) + 1) * 0.04;
-          ctx.strokeStyle = `rgba(0,71,171,${pulse})`;
+          // ctx.strokeStyle = `rgba(0,71,171,${pulse})`;
+          ctx.strokeStyle = this.cssToRgba(cssNode.trim(), pulse);
           ctx.stroke();
         }
       }
     }
 
     // nodes
+    // determine node fill color from CSS variable (configurable)
+    const nodeFill = this.cssToRgba(cssNode.trim(), 0.85);
+
     this.nodes.forEach((node) => {
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,71,171,0.85)';
+      ctx.fillStyle = nodeFill;
       ctx.fill();
     });
 
