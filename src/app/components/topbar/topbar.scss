@@ -23,6 +23,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.15s ease;
 }
 
 .menu-icon {
@@ -42,6 +43,16 @@
     border-radius: 999px;
     transition: transform 0.35s ease, top 0.35s ease;
     transform-origin: center;
+}
+
+/* Make the menu-toggle lines follow the hover/active colors without a background */
+.menu-toggle:hover {
+    color: var(--blue);
+    background: transparent;
+}
+
+.menu-toggle:active {
+    color: var(--blue-pressed);
 }
 
 .menu-icon span:first-child {
