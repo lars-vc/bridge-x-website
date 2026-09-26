@@ -23,6 +23,30 @@
     display: block;
 }
 
+.cta-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid;
+    border-color: var(--grafite);
+    border-width: 2px;
+    bottom: 4rem;
+    z-index: 20;
+    color: var(--grafite);
+    font-size: 1.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-left: 50px;
+    padding-right: 50px;
+    opacity: 0;
+}
+
+.cta-button.show2 {
+    opacity: 1;
+}
+
 /* legend on the right, stacked rows */
 .x-legend {
     position: absolute;
@@ -33,7 +57,6 @@
     flex-direction: column;
     gap: 1rem;
     align-items: flex-start;
-    z-index: 40;
     pointer-events: none;
 }
 

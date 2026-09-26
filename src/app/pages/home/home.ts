@@ -20,6 +20,8 @@ export class Home implements AfterViewInit, OnDestroy {
   private shown1 = false;
   private shown2 = false;
   private shown3 = false;
+  private ctaShown = false;
+  public showCta = false;
   private rafId = 0;
   private start = 0;
   private startOfXFormation = 1.5;
@@ -227,6 +229,12 @@ export class Home implements AfterViewInit, OnDestroy {
       if (a2) a2.classList.add('show');
       if (t3) t3.classList.add('show');
       this.shown3 = true;
+    }
+
+    if (seconds > this.startOfXFormation + 2.8 && !this.ctaShown) {
+      const butt = document.getElementById('butt');
+      if (butt) butt.classList.add('show2');
+      this.ctaShown = true;
     }
 
     this.rafId = requestAnimationFrame((t) => this.animate(t));

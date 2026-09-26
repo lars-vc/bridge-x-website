@@ -1,0 +1,78 @@
+h1 {
+    color: var(--blue);
+}
+
+.line-text {
+    color: var(--grafite);
+    font-size: 2rem;
+}
+
+.item-container {
+    gap: 150px;
+    margin-top: 10px;
+}
+
+.line-text-container {
+    gap: 50px;
+}
+
+.silver-text {
+    color: var(--silver);
+    font-size: 1.3rem;
+}
+
+.silver-container {
+    margin-top: 30px;
+}
+
+.what-button {
+    padding-left: 50px;
+    padding-right: 50px;
+    border: solid;
+    border-color: var(--grafite);
+    border-width: 2px;
+    z-index: 20;
+    color: var(--grafite);
+}
+
+.ticker {
+    --ticker-duration: 20s;
+    width: 100vw;
+    background: var(--blue);
+    color: white;
+    overflow: hidden;
+    padding: 0.5rem;
+}
+
+
+
+.ticker__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: ticker;
+    animation-duration: var(--ticker-duration);
+    text-align: center;
+    padding-left: 100%;
+    width: max-content;
+}
+
+.ticker__inner p {
+    margin: 0 2rem;
+}
+
+
+
+@keyframes ticker {
+    0% {
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0%, 0, 0);
+    }
+}
