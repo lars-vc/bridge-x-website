@@ -1,28 +1,39 @@
+.what-page {
+    overflow: visible;
+}
+
+.section-anchor {
+    scroll-margin-top: 120px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 h1 {
     color: var(--blue);
+    padding-top: 100px;
+    font-size: 3vw;
 }
 
 .line-text {
     color: var(--grafite);
-    font-size: 2rem;
+    font-size: 2vw;
+    font-weight: 400;
 }
 
 .item-container {
-    gap: 150px;
-    margin-top: 10px;
+    gap: 9vw;
 }
 
 .line-text-container {
-    gap: 50px;
+    gap: 2.5vw;
 }
 
 .silver-text {
     color: var(--silver);
-    font-size: 1.3rem;
-}
-
-.silver-container {
-    margin-top: 30px;
+    font-size: 0.9vw;
+    font-weight: 300;
 }
 
 .what-button {
@@ -33,12 +44,14 @@ h1 {
     border-width: 2px;
     z-index: 20;
     color: var(--grafite);
+    font-size: 0.9vw;
 }
 
 .ticker {
-    --ticker-duration: 20s;
+    --ticker-duration: 40s;
     width: 100vw;
-    background: var(--blue);
+    background: var(--blue-pressed);
+    // background: white;
     color: white;
     overflow: hidden;
     padding: 0.5rem;
@@ -63,16 +76,17 @@ h1 {
 
 .ticker__inner p {
     margin: 0 2rem;
+    font-size: 0.8vw;
 }
 
 
 
 @keyframes ticker {
     0% {
-        transform: translate3d(-100%, 0, 0);
+        transform: translate3d(0%, 0, 0);
     }
 
     100% {
-        transform: translate3d(0%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
     }
 }

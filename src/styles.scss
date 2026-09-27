@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
 :root {
     --blue: #0047AB;
@@ -13,12 +15,14 @@
 body {
 
     margin: 0;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     background: white;
 
     font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
     font-size: 18px;
 
     color: var(--dark);
@@ -47,7 +51,7 @@ body {
 }
 
 /* Button / interactive element defaults */
-button,
+
 .btn {
     background: transparent;
     border: none;
@@ -56,13 +60,16 @@ button,
     transition: color 0.15s ease, background-color 0.12s ease;
 }
 
-button:hover,
+
 .btn:hover {
     color: var(--blue);
     background: #f1f1f1;
 }
 
-button:active,
-.btn:active {
-    color: var(--blue-pressed);
+
+.btn:active,
+.btn-primary:active,
+.btn:first-child:active {
+    color: white !important;
+    background: var(--blue-pressed) !important;
 }
