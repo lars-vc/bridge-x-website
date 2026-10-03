@@ -17,8 +17,8 @@
 
             <div class="d-flex align-items-center silver-container gap-5">
                 <div class="silver-text">You can't improve what you can't see</div>
-                <button class="btn btn-primary bt what-button">What insights do you need? <i
-                        class="bi bi-arrow-right"></i></button>
+                <a class="btn btn-primary bt what-button" routerLink="/what" fragment="cta">What insights do you need?
+                    <i class="bi bi-arrow-right"></i></a>
             </div>
             <aside class="ticker m-3">
                 <div class="ticker__inner">
@@ -44,8 +44,8 @@
 
             <div class="d-flex align-items-center silver-container gap-5">
                 <div class="silver-text">Strategy is commodity. Execution is the differentiator.</div>
-                <button class="btn btn-primary what-button">What action do you need? <i
-                        class="bi bi-arrow-right"></i></button>
+                <a class="btn btn-primary what-button" routerLink="/what" fragment="cta">What action do you need? <i
+                        class="bi bi-arrow-right"></i></a>
             </div>
             <aside class="ticker m-3">
                 <div class="ticker__inner">
@@ -71,13 +71,146 @@
 
             <div class="d-flex align-items-center silver-container gap-5">
                 <div class="silver-text">Transformation without EBITDA impact is just overhead.</div>
-                <button class="btn btn-primary what-button">What impact do you need? <i
-                        class="bi bi-arrow-right"></i></button>
+                <a class="btn btn-primary what-button" routerLink="/what" fragment="cta">What impact do you need? <i
+                        class="bi bi-arrow-right"></i></a>
             </div>
             <aside class="ticker m-3">
                 <div class="ticker__inner">
                     <p>we make an impact</p>
                 </div>
+            </aside>
+        </div>
+    </div>
+    <div id="X" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="gap: 2vw">
+            <div class="d-flex align-items-center justify-content-center square-container">
+                <div class="flippable-square">
+                    <span class="square-flipper">
+                        <span
+                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-lg">100+</span>
+                            <span class="square-text-sm">Industrial &amp; project environments</span>
+                        </span>
+                        <span
+                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-back">100+ operations visited & assessed across industries,
+                                technologies & operating models</span>
+                        </span>
+                    </span>
+                </div>
+
+                <div style="width: 10vw"></div>
+
+                <div class="flippable-square">
+                    <span class="square-flipper">
+                        <span
+                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-lg">40+</span>
+                            <span class="square-text-sm">manufacturing technologies</span>
+                        </span>
+                        <span
+                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-back">exposure to 40+ technologies from traditional production to
+                                advanced automation and innovation</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center square-container">
+                <div class="flippable-square">
+                    <span class="square-flipper">
+                        <span
+                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-lg">X</span>
+                        </span>
+                        <span
+                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-back">Shared ownership <br />Co-piloted execution <br /> Operator
+                                mindset <br />
+                                Speed-to-value</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center square-container">
+                <div class="flippable-square">
+                    <span class="square-flipper">
+                        <span
+                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-lg">20+</span>
+                            <span class="square-text-sm">cross functional perpective</span>
+                        </span>
+                        <span
+                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-back">20+ years connecting procurement, operations, engineering,
+                                product & sales</span>
+                        </span>
+                    </span>
+                </div>
+
+                <div style="width: 10vw"></div>
+
+                <div class="flippable-square">
+                    <span class="square-flipper">
+                        <span
+                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-lg">What about you?</span>
+                            <span class="square-text-sm"></span>
+                        </span>
+                        <span
+                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                            <span class="square-text-back">BLAH</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center silver-container gap-5">
+                <div class="silver-text">Not an advisor on the sidelines. An operator alongside you.</div>
+                <a class="btn btn-primary what-button" routerLink="/what" fragment="cta">What about you? <i
+                        class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="cta" class="d-flex justify-content-center align-items-center section-anchor" style="height: 100vh;">
+        <div class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-intro">
+                    <h2>Where do you want to access value?</h2>
+                    <p>Leave your details — I'll get back to you personally.</p>
+                </div>
+
+                <div class="cta-grid">
+                    <div class="cta-field">
+                        <label for="cta-name">Name</label>
+                        <input id="cta-name" type="text" placeholder="Your Name" />
+                    </div>
+
+                    <div class="cta-field">
+                        <label for="cta-email">Email</label>
+                        <input id="cta-email" type="email" placeholder="john@company.com" />
+                    </div>
+
+                    <div class="cta-field full-width">
+                        <label for="cta-situation">Situation</label>
+                        <input id="cta-situation" type="text" placeholder="Select your main challenge..." />
+                    </div>
+
+                    <div class="cta-field full-width">
+                        <label for="cta-question">What is your next move?</label>
+                        <input id="cta-question" type="text" placeholder="What are you working toward?" />
+                    </div>
+                </div>
+
+                <button class="cta-submit" type="button">
+                    Let's Talk
+                    <span aria-hidden="true">→</span>
+                </button>
+            </div>
+
+            <aside class="cta-note">
+                <p>What are you working on right now?</p>
             </aside>
         </div>
     </div>

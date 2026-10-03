@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Topbar } from "../../components/topbar/topbar";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [Topbar],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

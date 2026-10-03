@@ -2,9 +2,9 @@
     <div class="container-fluid">
         <a class="navbar-brand" routerLink=""><strong>Bridge-<span style="color:var(--blue)">X</span></strong></a>
         <div class="d-flex align-items-center">
-            <button class="btn btn-primary mx-2">
+            <a class="btn btn-primary mx-2" routerLink="/what" fragment="cta" style="font-weight: 500; font-size: 0.6vw; text-decoration: none;">
                 Get in contact
-            </button>
+            </a>
             <button type="button" class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle navigation menu"
                 [attr.aria-expanded]="isMenuOpen">
                 <span class="menu-icon" [class.open]="isMenuOpen">
@@ -23,7 +23,7 @@
         <a routerLink="/what" fragment="complexity" (click)="closeMenu()">What we see</a>
         <a routerLink="/what" fragment="ambition" (click)="closeMenu()">What we do</a>
         <a routerLink="/what" fragment="change" (click)="closeMenu()">What we bring</a>
-        <a routerLink="/what" (click)="closeMenu()">What sets us apart</a>
-        <a routerLink="/what" (click)="closeMenu()">What about you</a>
+        <a routerLink="/what" fragment="X" (click)="closeMenu()">What sets us apart</a>
+        <a routerLink="/what" fragment="cta" (click)="closeMenu()">What about you</a>
     </div>
 </div>
