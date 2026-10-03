@@ -123,9 +123,11 @@ h1 {
     inset: 0;
     padding: 0.75rem;
     border: 2px solid var(--grafite);
-    border-radius: 8px;
-    background-color: var(--blue);
-    color: white;
+    border-radius: 15px;
+
+    background-color: white;
+    // background: linear-gradient(180deg, #0a2d6d 0%, #003488 100%);
+    color: var(--grafite);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     text-align: center;
@@ -133,23 +135,24 @@ h1 {
 
 .square-back {
     transform: rotateY(180deg);
-    background-color: white;
+    // background-color: white;
+    background-color: var(--blue-pressed);
 }
 
 .square-text-lg {
-    color: white;
+    // color: white;
     font-size: 2vw;
     font-weight: 500;
 }
 
 .square-text-sm {
-    color: white;
-    font-size: 0.5vw;
+    // color: white;
+    font-size: 0.6vw;
 }
 
 .square-text-back {
-    color: var(--grafite);
-    font-size: 0.5vw;
+    color: white;
+    font-size: 0.6vw;
 }
 
 .square-container {
