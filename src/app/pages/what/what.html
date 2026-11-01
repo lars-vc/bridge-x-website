@@ -1,7 +1,7 @@
 <div class="what-page">
     <div id="complexity" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
         <div class="d-flex flex-column align-items-center justify-content-between">
-            <h1>We turn complexity into insights</h1>
+            <h1>We turn complexity into clarity.</h1>
             <div class="d-flex flex-row item-container">
                 <div class="d-flex flex-column line-text-container">
                     <h2 class="line-text">| Margin pressure.</h2>
@@ -9,15 +9,24 @@
                     <h2 class="line-text">| Supplier fragmentation.</h2>
                 </div>
                 <div class="d-flex flex-column line-text-container">
-                    <h2 class="line-text">| Disconnected processes.</h2>
+                    <h2 class="line-text">| Disconnected operations.</h2>
                     <h2 class="line-text">| Slow decisions.</h2>
                     <h2 class="line-text">| Growth complexity.</h2>
                 </div>
             </div>
 
             <div class="d-flex align-items-center silver-container gap-5">
-                <div class="silver-text">You can't improve what you can't see</div>
-                <a class="btn btn-primary bt what-button" routerLink="/what" fragment="cta">What insights do you need?
+                <div #silverText class="silver-text">
+                    <span class="visually-hidden">You can't improve what you can't see</span>
+                    <span aria-hidden="true" style="white-space: pre;">
+                        @for (letter of clarityLetters; track $index) {
+                        <span [style.color]="silverTextVisibility[0]() ? 'var(--blue)' : 'var(--silver)'"
+                            [style.transition]="prefersReducedMotion ? 'none' : 'color 250ms ease ' + ($index * 35) + 'ms'">{{
+                            letter }}</span>
+                        }
+                    </span>
+                </div>
+                <a class="btn btn-primary bt what-button" routerLink="/what" fragment="cta">What needs clarity?
                     <i class="bi bi-arrow-right"></i></a>
             </div>
             <aside class="ticker m-3">
@@ -30,20 +39,29 @@
 
     <div id="ambition" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
         <div class="d-flex flex-column align-items-center justify-content-between">
-            <h1>We turn ambition into action</h1>
+            <h1>We turn ambition into action.</h1>
             <div class="d-flex flex-row item-container">
                 <div class="d-flex flex-column line-text-container">
-                    <h2 class="line-text">| Performance optimisation.</h2>
+                    <h2 class="line-text">| Performance & productivity.</h2>
                     <h2 class="line-text">| Operating model design.</h2>
                 </div>
                 <div class="d-flex flex-column line-text-container">
-                    <h2 class="line-text">| Process integration.</h2>
+                    <h2 class="line-text">| Process efficiency.</h2>
                     <h2 class="line-text">| Organisational alignment.</h2>
                 </div>
             </div>
 
             <div class="d-flex align-items-center silver-container gap-5">
-                <div class="silver-text">Strategy is commodity. Execution is the differentiator.</div>
+                <div #silverText class="silver-text">
+                    <span class="visually-hidden">A strategy that doesn't move is just a plan.</span>
+                    <span aria-hidden="true" style="white-space: pre;">
+                        @for (letter of ambitionLetters; track $index) {
+                        <span [style.color]="silverTextVisibility[1]() ? 'var(--blue)' : 'var(--silver)'"
+                            [style.transition]="prefersReducedMotion ? 'none' : 'color 250ms ease ' + ($index * 35) + 'ms'">{{
+                            letter }}</span>
+                        }
+                    </span>
+                </div>
                 <a class="btn btn-primary what-button" routerLink="/what" fragment="cta">What action do you need? <i
                         class="bi bi-arrow-right"></i></a>
             </div>
@@ -57,20 +75,29 @@
 
     <div id="change" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
         <div class="d-flex flex-column align-items-center justify-content-between">
-            <h1>We turn change into business impact</h1>
+            <h1>We turn change into business impact.</h1>
             <div class="d-flex flex-row item-container">
                 <div class="d-flex flex-column line-text-container">
-                    <h2 class="line-text">| Synergy realisation.</h2>
-                    <h2 class="line-text">| Operational velocity.</h2>
+                    <h2 class="line-text">| Business prespective.</h2>
+                    <h2 class="line-text">| Execution experience.</h2>
                 </div>
                 <div class="d-flex flex-column line-text-container">
-                    <h2 class="line-text">| Bottom-line results.</h2>
-                    <h2 class="line-text">| Data-driven decisions.</h2>
+                    <h2 class="line-text">| Cross-functional connection.</h2>
+                    <h2 class="line-text">| People engagement.</h2>
                 </div>
             </div>
 
             <div class="d-flex align-items-center silver-container gap-5">
-                <div class="silver-text">Transformation without EBITDA impact is just overhead.</div>
+                <div #silverText class="silver-text">
+                    <span class="visually-hidden">We don't advise from the sidelines. We work alongside you.</span>
+                    <span aria-hidden="true" style="white-space: pre;">
+                        @for (letter of transformationLetters; track $index) {
+                        <span [style.color]="silverTextVisibility[2]() ? 'var(--blue)' : 'var(--silver)'"
+                            [style.transition]="prefersReducedMotion ? 'none' : 'color 250ms ease ' + ($index * 35) + 'ms'">{{
+                            letter }}</span>
+                        }
+                    </span>
+                </div>
                 <a class="btn btn-primary what-button" routerLink="/what" fragment="cta">What impact do you need? <i
                         class="bi bi-arrow-right"></i></a>
             </div>
@@ -81,98 +108,185 @@
             </aside>
         </div>
     </div>
+
+
+
+
+
+
     <div id="X" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="gap: 2vw">
-            <div class="d-flex align-items-center justify-content-center square-container">
-                <div class="flippable-square">
-                    <span class="square-flipper">
-                        <span
-                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-lg">100+</span>
-                            <span class="square-text-sm">Industrial &amp; project environments</span>
+        <div class="d-flex flex-column" style="gap: 2vw;">
+            <h1>We connect what others see separately.</h1>
+            <div class="d-flex" style="gap: 2vw;">
+                <div class="d-flex square-container">
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">100+</span>
+                                <span class="square-text-sm">Industrial &amp; project environments</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">100+ operations visited & assessed across industries,
+                                    technologies & operating models</span>
+                            </span>
                         </span>
-                        <span
-                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-back">100+ operations visited & assessed across industries,
-                                technologies & operating models</span>
-                        </span>
-                    </span>
+                    </div>
                 </div>
 
-                <div style="width: 5vw"></div>
-
-                <div class="flippable-square">
-                    <span class="square-flipper">
-                        <span
-                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-lg">40+</span>
-                            <span class="square-text-sm">manufacturing technologies</span>
+                <div class="d-flex flex-column square-container">
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <img class="flip-image" src="/katty_met_helm.jpeg" alt="Katty" />
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <img class="flip-image" src="/katty.jpg" alt="Katty" />
+                            </span>
                         </span>
-                        <span
-                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-back">exposure to 40+ technologies from traditional production to
-                                advanced automation and innovation</span>
+                    </div>
+                    <div class="flippable-square">
+                    </div>
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">X</span>
+                                <span class="square-text-sm">Whole picture</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">We look at business as a whole, not in silo's</span>
+                            </span>
                         </span>
-                    </span>
+                    </div>
                 </div>
+
+
+                <div class="d-flex flex-column square-container">
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">X</span>
+                                <span class="square-text-sm">Proven. Practical.</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">We bring experience that translates into action</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">20+</span>
+                                <span class="square-text-sm">Years</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">Cross-functional leadership</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="d-flex flex-column square-container" style="margin-top:5vw">
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <img class="flip-image" src="/coil.jpeg"
+                                    alt="Coil processing line in an industrial facility" />
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">We start where the business happens</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">X</span>
+                                <span class="square-text-sm">Strategy to execution</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">We work from boardroom to shopfloor</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column square-container">
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">40+</span>
+                                <span class="square-text-sm">Technologies & business contexts</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">Across plastic, chemicals, metals, electronics and
+                                    machinery</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="flippable-square">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-lg">X</span>
+                                <span class="square-text-sm">Cross-functional</span>
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">We connect functions that rarely work as one</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="flippable-square" style="margin-left:5vw">
+                        <span class="square-flipper">
+                            <span
+                                class="square-face square-front d-flex flex-column align-items-center justify-content-center">
+                                <img class="flip-image" src="/rfid.jpeg"
+                                    alt="Coil processing line in an industrial facility" />
+                            </span>
+                            <span
+                                class="square-face square-back d-flex flex-column align-items-center justify-content-center">
+                                <span class="square-text-back">We question the obvious</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
             </div>
-            <div class="d-flex align-items-center justify-content-center square-container">
-                <div class="flippable-square">
-                    <span class="square-flipper">
-                        <span
-                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-lg">X</span>
-                        </span>
-                        <span
-                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-back">Shared ownership <br />Co-piloted execution <br /> Operator
-                                mindset <br />
-                                Speed-to-value</span>
-                        </span>
+            <div class="d-flex justify-content-center align-items-center silver-container gap-5">
+                <div #silverText class="silver-text">
+                    <span class="visually-hidden">Not an advisor on the sidelines. An operator alongside you.</span>
+                    <span aria-hidden="true" style="white-space: pre;">
+                        @for (letter of operatorLetters; track $index) {
+                        <span [style.color]="silverTextVisibility[3]() ? 'var(--blue)' : 'var(--silver)'"
+                            [style.transition]="prefersReducedMotion ? 'none' : 'color 250ms ease ' + ($index * 35) + 'ms'">{{
+                            letter }}</span>
+                        }
                     </span>
                 </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-center square-container">
-                <div class="flippable-square">
-                    <span class="square-flipper">
-                        <span
-                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-lg">20+</span>
-                            <span class="square-text-sm">cross functional perpective</span>
-                        </span>
-                        <span
-                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-back">20+ years connecting procurement, operations, engineering,
-                                product & sales</span>
-                        </span>
-                    </span>
-                </div>
-
-                <div style="width: 5vw"></div>
-
-                <div class="flippable-square">
-                    <span class="square-flipper">
-                        <span
-                            class="square-face square-front d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-lg">What about you?</span>
-                            <span class="square-text-sm"></span>
-                        </span>
-                        <span
-                            class="square-face square-back d-flex flex-column align-items-center justify-content-center">
-                            <span class="square-text-back">BLAH</span>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center silver-container gap-5">
-                <div class="silver-text" style="color: var(--blue)">Not an advisor on the sidelines. An operator
-                    alongside you.</div>
                 <a class="btn btn-primary what-button" routerLink="/what" fragment="cta">What about you? <i
                         class="bi bi-arrow-right"></i></a>
             </div>
         </div>
     </div>
+
+
+
 
     <div id="cta" class="d-flex justify-content-center align-items-center section-anchor" style="height: 100vh;">
         <div class="cta-wrapper">
