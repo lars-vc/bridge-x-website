@@ -2,7 +2,7 @@
     <div id="complexity" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
         <div class="d-flex flex-column align-items-center justify-content-between">
             <h1>We turn complexity into clarity.</h1>
-            <div class="d-flex flex-row item-container">
+            <div class="d-flex flex-column flex-md-row item-container">
                 <div class="d-flex flex-column line-text-container">
                     <h2 class="line-text">| Margin pressure.</h2>
                     <h2 class="line-text">| Rising risk.</h2>
@@ -40,7 +40,7 @@
     <div id="ambition" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
         <div class="d-flex flex-column align-items-center justify-content-between">
             <h1>We turn ambition into action.</h1>
-            <div class="d-flex flex-row item-container">
+            <div class="d-flex flex-column flex-md-row item-container">
                 <div class="d-flex flex-column line-text-container">
                     <h2 class="line-text">| Performance & productivity.</h2>
                     <h2 class="line-text">| Operating model design.</h2>
@@ -76,7 +76,7 @@
     <div id="change" class="d-flex justify-content-center section-anchor" style="height: 100vh;">
         <div class="d-flex flex-column align-items-center justify-content-between">
             <h1>We turn change into business impact.</h1>
-            <div class="d-flex flex-row item-container">
+            <div class="d-flex flex-column flex-md-row item-container">
                 <div class="d-flex flex-column line-text-container">
                     <h2 class="line-text">| Business prespective.</h2>
                     <h2 class="line-text">| Execution experience.</h2>
@@ -288,45 +288,78 @@
 
 
 
-    <div id="cta" class="d-flex justify-content-center align-items-center section-anchor" style="height: 100vh;">
-        <div class="cta-wrapper">
-            <div class="cta-card">
-                <div class="cta-intro">
-                    <h2>Where do you want to access value?</h2>
-                    <p>Leave your details — I'll get back to you personally.</p>
-                </div>
-
-                <div class="cta-grid">
-                    <div class="cta-field">
-                        <label for="cta-name">Name</label>
-                        <input id="cta-name" type="text" placeholder="Your Name" />
-                    </div>
-
-                    <div class="cta-field">
-                        <label for="cta-email">Email</label>
-                        <input id="cta-email" type="email" placeholder="john@company.com" />
-                    </div>
-
-                    <div class="cta-field full-width">
-                        <label for="cta-situation">Situation</label>
-                        <input id="cta-situation" type="text" placeholder="Select your main challenge..." />
-                    </div>
-
-                    <div class="cta-field full-width">
-                        <label for="cta-question">What is your next move?</label>
-                        <input id="cta-question" type="text" placeholder="What are you working toward?" />
-                    </div>
-                </div>
-
-                <button class="cta-submit" type="button">
-                    Let's Talk
-                    <span aria-hidden="true">→</span>
-                </button>
+    <div id="cta" class="d-flex justify-content-center align-items-center section-anchor cta-section">
+        <div class="cta-card">
+            <div class="cta-intro">
+                <h2>Where do you want to accelerate?</h2>
+                <p>Leave your details - I'll get back to you personally.</p>
             </div>
 
-            <aside class="cta-note">
-                <p>What are you working on right now?</p>
-            </aside>
+            <form class="cta-form" (submit)="onCtaSubmit($event)">
+                <div class="cta-field">
+                    <label for="cta-name">Name<span class="required" aria-hidden="true">*</span></label>
+                    <input id="cta-name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+                </div>
+
+                <div class="cta-field">
+                    <label for="cta-email">Email<span class="required" aria-hidden="true">*</span></label>
+                    <input id="cta-email" name="email" type="email" placeholder="Your email" autocomplete="email"
+                        required />
+                </div>
+
+                <div class="cta-field">
+                    <span class="cta-label">Situation</span>
+                    <details class="cta-select">
+                        <summary id="cta-situation">
+                            <span [class.placeholder-text]="selectedSituations.length === 0">
+                                {{ selectedSituations.length ? selectedSituations.join(', ') : 'Select your
+                                challenges...' }}
+                            </span>
+                            <span class="cta-chevron" aria-hidden="true"></span>
+                        </summary>
+                        <div class="cta-options">
+                            <label class="cta-option">
+                                <input name="situation" type="checkbox" value="Strategy Execution"
+                                    (change)="onSituationChange($event)" />
+                                Strategy Execution
+                            </label>
+                            <label class="cta-option">
+                                <input name="situation" type="checkbox" value="Performance & Productivity"
+                                    (change)="onSituationChange($event)" />
+                                Performance &amp; Productivity
+                            </label>
+                            <label class="cta-option">
+                                <input name="situation" type="checkbox" value="Process Efficiency"
+                                    (change)="onSituationChange($event)" />
+                                Process Efficiency
+                            </label>
+                            <label class="cta-option">
+                                <input name="situation" type="checkbox" value="Organisational Alignment"
+                                    (change)="onSituationChange($event)" />
+                                Organisational Alignment
+                            </label>
+                            <label class="cta-option">
+                                <input name="situation" type="checkbox" value="Other"
+                                    (change)="onSituationChange($event)" />
+                                Other
+                            </label>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="cta-field">
+                    <label for="cta-question">What's your next move?</label>
+                    <textarea id="cta-question" name="next_move" placeholder="What are you working toward?"></textarea>
+                </div>
+
+                <button class="cta-submit" type="submit" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'Sending...' : "Let's Talk" }}
+                    <span class="cta-arrow" aria-hidden="true">&#8594;</span>
+                </button>
+                <p class="cta-confirmation" role="status" aria-live="polite">{{ submissionMessage }}</p>
+            </form>
         </div>
     </div>
+
+    <app-footer></app-footer>
 </div>

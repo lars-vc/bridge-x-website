@@ -22,11 +22,20 @@
     color: inherit;
 }
 
+.topbar-contact {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
 .menu-toggle {
     border: 0;
     background: transparent;
     color: inherit;
     padding: 0.25rem 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -102,6 +111,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
+    padding: 5rem 1.5rem;
     background: #fff;
     transform: translateY(-100%);
     transition: transform 0.5s ease;
@@ -132,7 +143,7 @@
 .overlay-links a {
     color: var(--grafite);
     text-decoration: none;
-    font-size: 1.5vw;
+    font-size: clamp(1.25rem, 1.5vw, 1.75rem);
     font-weight: 600;
 }
 
@@ -142,4 +153,35 @@
 
 .overlay-links a:active {
     color: var(--blue-pressed);
+}
+
+@media (max-width: 575.98px) {
+    .navbar {
+        padding-inline: 0.75rem !important;
+    }
+
+    .navbar .container-fluid {
+        padding-inline: 0;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .topbar-contact {
+        padding: 0.5rem 0.625rem;
+        font-size: 0.8125rem;
+    }
+
+    .overlay-links {
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+        gap: 1.25rem;
+        text-align: left;
+    }
+
+    .overlay-links a {
+        font-size: clamp(1.375rem, 6vw, 1.75rem);
+    }
 }

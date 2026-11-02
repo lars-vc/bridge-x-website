@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, signal, ViewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-what',
-  imports: [RouterLink],
+  imports: [RouterLink, Footer],
   templateUrl: './what.html',
   styleUrl: './what.scss',
 })
@@ -15,6 +16,9 @@ export class What implements AfterViewInit, OnDestroy {
   readonly transformationLetters = Array.from('We don\'t advise from the sidelines. We work alongside you.');
   readonly operatorLetters = Array.from('Not an advisor on the sidelines. An operator alongside you.');
   readonly silverTextVisibility = [signal(false), signal(false), signal(false), signal(false)];
+  selectedSituations: string[] = [];
+  submissionMessage = '';
+  isSubmitting = false;
   readonly prefersReducedMotion = typeof window !== 'undefined'
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   private silverTextObserver?: IntersectionObserver;
@@ -39,5 +43,47 @@ export class What implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.silverTextObserver?.disconnect();
+  }
+
+  onSituationChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.selectedSituations = checkbox.checked
+      ? [...this.selectedSituations, checkbox.value]
+      : this.selectedSituations.filter((situation) => situation !== checkbox.value);
+  }
+
+  async onCtaSubmit(event: SubmitEvent): Promise<void> {
+    // https://app.web3forms.com/forms/1786a01b-05b4-4d97-a562-bcb6de31e753/submissions
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!(form instanceof HTMLFormElement)) return;
+
+    this.isSubmitting = true;
+    this.submissionMessage = '';
+
+    try {
+      const formData = new FormData(form);
+      formData.append('access_key', '1786a01b-05b4-4d97-a562-bcb6de31e753');
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json() as { success?: boolean; message?: string };
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Unable to send your message. Please try again.');
+      }
+
+      form.reset();
+      this.selectedSituations = [];
+      this.submissionMessage = 'Success! Your message has been sent.';
+    } catch (error) {
+      this.submissionMessage = error instanceof Error
+        ? `Error: ${error.message}`
+        : 'Something went wrong. Please try again.';
+    } finally {
+      this.isSubmitting = false;
+    }
   }
 }

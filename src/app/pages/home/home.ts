@@ -1,9 +1,10 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, Footer],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -68,7 +69,8 @@ export class Home implements AfterViewInit, OnDestroy {
   private computeAmount(): number {
     const minDim = Math.min(this.width || window.innerWidth, this.height || window.innerHeight);
     const calculated = Math.round(minDim * 0.10); // scale factor: 0.25 * min dimension
-    return Math.max(this.minNodes, Math.min(this.maxNodes, calculated));
+    // return Math.max(this.minNodes, Math.min(this.maxNodes, calculated));
+    return this.width <= 575 ? 120 : 150;
   }
 
   private updateAmountAndNodes(recreate = false): void {
@@ -82,7 +84,7 @@ export class Home implements AfterViewInit, OnDestroy {
           y: Math.random() * this.height,
           vx: (Math.random() - 0.5) * 0.8,
           vy: (Math.random() - 0.5) * 0.8,
-          size: Math.random() * 4 + 2,
+          size: this.width <= 575 ? Math.random() * 1.5 + 0.75 : Math.random() * 4 + 2,
           tx: 0,
           ty: 0,
           offset: Math.random() * 10,
@@ -116,12 +118,12 @@ export class Home implements AfterViewInit, OnDestroy {
   }
 
   private createXStructure(): void {
-    const centerX = this.width * 0.28; // move X to the left side
-    const centerY = this.height * 0.5;
-    const baseSpread = Math.min(this.width, this.height) * 0.18; // base scale for the X
+    const centerX = this.width * (this.width <= 575 ? 0.5 : 0.28);
+    const centerY = this.height * (this.width <= 575 ? 0.26 : 0.5);
+    const baseSpread = Math.min(this.width, this.height) * (this.width <= 575 ? 0.2 : 0.18);
     const xSpread = baseSpread * 0.9; // horizontal half-width (smaller)
     const ySpread = baseSpread * 1.4; // vertical half-height (taller) to look more like an 'X'
-    const thickness = Math.min(this.width, this.height) * 0.06; // perpendicular spread for thicker legs
+    const thickness = Math.min(this.width, this.height) * (this.width <= 575 ? 0.035 : 0.06);
 
     const perSide = Math.ceil(this.amount / 2);
 
@@ -185,7 +187,7 @@ export class Home implements AfterViewInit, OnDestroy {
         const dx = a.x - b.x;
         const dy = a.y - b.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < 150) {
+        if (distance < (this.width <= 575 ? 48 : 150)) {
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
