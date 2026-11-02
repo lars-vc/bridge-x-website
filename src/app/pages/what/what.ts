@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, signal, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Footer } from '../../components/footer/footer';
 
@@ -10,11 +10,12 @@ import { Footer } from '../../components/footer/footer';
 })
 export class What implements AfterViewInit, OnDestroy {
   @ViewChildren('silverText') private silverTextElements!: QueryList<ElementRef<HTMLElement>>;
+  @ViewChild('tileGrid') private tileGrid!: ElementRef<HTMLElement>;
 
   readonly clarityLetters = Array.from("You can't improve what you can't see");
   readonly ambitionLetters = Array.from('A strategy that doesn\'t move is just a plan.');
   readonly transformationLetters = Array.from('We don\'t advise from the sidelines. We work alongside you.');
-  readonly operatorLetters = Array.from('Not an advisor on the sidelines. An operator alongside you.');
+  readonly operatorLetters = Array.from('Experience that connects. Execution that delivers.');
   readonly silverTextVisibility = [signal(false), signal(false), signal(false), signal(false)];
   selectedSituations: string[] = [];
   submissionMessage = '';
@@ -24,6 +25,18 @@ export class What implements AfterViewInit, OnDestroy {
   private silverTextObserver?: IntersectionObserver;
 
   ngAfterViewInit(): void {
+    this.tileGrid.nativeElement.querySelectorAll<HTMLElement>('.flippable-square').forEach((tile) => {
+      const front = tile.querySelector<HTMLElement>('.square-front');
+      if (!front) return;
+
+      const imageAlt = front.querySelector('img')?.alt;
+      const textLabel = front.textContent?.trim().replace(/\s+/g, ' ');
+      tile.tabIndex = 0;
+      tile.setAttribute('role', 'button');
+      tile.setAttribute('aria-pressed', 'false');
+      tile.setAttribute('aria-label', imageAlt || textLabel || 'Show tile details');
+    });
+
     this.silverTextObserver = new IntersectionObserver((entries) => {
       const elements = this.silverTextElements.toArray();
       for (const entry of entries) {
@@ -50,6 +63,19 @@ export class What implements AfterViewInit, OnDestroy {
     this.selectedSituations = checkbox.checked
       ? [...this.selectedSituations, checkbox.value]
       : this.selectedSituations.filter((situation) => situation !== checkbox.value);
+  }
+
+  toggleTile(event: MouseEvent | KeyboardEvent): void {
+    const tile = (event.target as Element).closest<HTMLElement>('.flippable-square');
+    if (!tile?.querySelector('.square-flipper')) return;
+
+    if (event instanceof KeyboardEvent) {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+    }
+
+    const isFlipped = tile.classList.toggle('is-flipped');
+    tile.setAttribute('aria-pressed', String(isFlipped));
   }
 
   async onCtaSubmit(event: SubmitEvent): Promise<void> {
