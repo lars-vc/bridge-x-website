@@ -12,8 +12,17 @@ html {
 
 h1 {
     color: var(--blue);
-    padding-top: 100px;
     font-size: 3vw;
+}
+
+.section-heading h1 {
+    padding-top: 0;
+}
+
+.section-label {
+    display: block;
+    font-size: 1.5vw;
+    color: var(--silver)
 }
 
 .line-text {
@@ -22,12 +31,100 @@ h1 {
     font-weight: 400;
 }
 
+.line-item {
+    border-left: 4px solid var(--grafite);
+    padding-left: 0.75rem;
+}
+
+.line-item .line-text,
+.line-subtext {
+    margin: 0;
+}
+
+.line-subtext {
+    margin-top: 0.35rem;
+    color: var(--grafite);
+    font-size: clamp(0.875rem, 1.1vw, 1.125rem);
+    line-height: 1.45;
+}
+
 .item-container {
     gap: 9vw;
 }
 
 .line-text-container {
     gap: 2.5vw;
+}
+
+.ambition-section {
+    min-height: 100vh;
+    padding: 2rem clamp(1.5rem, 5vw, 5rem);
+    box-sizing: border-box;
+}
+
+.ambition-content {
+    width: min(1200px, 100%);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding-bottom: 1.5rem;
+}
+
+.offering-card {
+    background: var(--blue-pressed);
+}
+
+.change-content {
+    width: min(1200px, 100%);
+    margin-inline: auto;
+}
+
+.change-points h2 {
+    margin-bottom: 0.5rem;
+}
+
+.change-point-number {
+    flex: 0 0 2.5rem;
+    color: var(--blue);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.change-portrait {
+    position: relative;
+    min-height: 32rem;
+    overflow: hidden;
+}
+
+.change-portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+}
+
+.change-portrait-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: rgba(17, 17, 17, 0.75);
+    color: white;
+}
+
+.change-portrait-caption span {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.change-portrait-caption small {
+    margin-top: 0.5rem;
+    font-size: 1rem;
 }
 
 .silver-text {
@@ -413,6 +510,10 @@ h1 {
 
 @media (max-width: 768px) {
 
+    .change-portrait {
+        min-height: 28rem;
+    }
+
     #complexity,
     #ambition,
     #change {
@@ -431,6 +532,10 @@ h1 {
         width: 100%;
         padding-top: 40px;
         font-size: clamp(1.75rem, 7vw, 2.5rem);
+        text-align: center;
+    }
+
+    .section-label {
         text-align: center;
     }
 
@@ -479,6 +584,14 @@ h1 {
 }
 
 @media (max-width: 575.98px) {
+    .section-label {
+        font-size: 1.25rem;
+    }
+
+    .ambition-section {
+        padding-inline: 1rem;
+    }
+
     #X {
         height: auto !important;
         min-height: 100vh;

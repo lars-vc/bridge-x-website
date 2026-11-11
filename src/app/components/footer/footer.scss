@@ -30,6 +30,7 @@
     color: #ffffff;
 }
 
+.footer-column h3 a,
 .footer-column p,
 .footer-column a {
     margin: 0.2rem 0;
@@ -39,7 +40,12 @@
     text-decoration: none;
 }
 
-.footer-column a:hover {
+.footer-column h3 a {
+    color: #ffffff;
+}
+
+.footer-column a:hover,
+.footer-column h3 a:hover {
     color: #ffffff;
     text-decoration: underline;
 }

@@ -29,9 +29,9 @@ export class Home implements AfterViewInit, OnDestroy {
   private resizeHandler = () => this.onResize();
 
   private onResize(): void {
-    this.resize(); // updates this.width/height and canvas size
-    this.startOfXFormation = 0.5
-    this.updateAmountAndNodes(true);
+    // this.resize(); // updates this.width/height and canvas size
+    // this.startOfXFormation = 0.5
+    // this.updateAmountAndNodes(true);
   }
 
   private cssToRgba(cssColor: string, alpha = 1): string {

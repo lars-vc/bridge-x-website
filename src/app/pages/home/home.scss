@@ -15,12 +15,86 @@
     height: 100vh;
 }
 
+.home-content {
+    height: 70vh;
+}
+
+.hero-row {
+    flex: 1;
+    min-height: 0;
+    // align-items: center;
+    justify-content: flex-start;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    padding: clamp(1.5rem, 4vw, 4rem);
+    box-sizing: border-box;
+}
+
+.hero-copy {
+    flex: 0 1 50%;
+    max-width: 50%;
+    min-width: 0;
+    gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.hero-copy h1,
+.hero-copy p {
+    margin: 0;
+}
+
+.hero-copy h1 {
+    // max-width: 14ch;
+}
+
+.hero-copy p {
+    max-width: 55ch;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    align-items: center;
+}
+
+.hero-image {
+    flex: 0 1 42%;
+    // width: 42%;
+    // max-width: 42%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.audience-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--silver);
+    border-radius: 8px;
+}
+
+.audience-list {
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.audience-item h2 {
+    margin: 0;
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 .network-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.cta-button2 {
+    border: solid;
+    border-color: var(--grafite);
+    border-width: 2px;
 }
 
 .cta-button {
@@ -51,7 +125,7 @@
 .x-legend {
     position: absolute;
     left: max(600px, 55%);
-    top: 50%;
+    top: 50vh;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -101,6 +175,25 @@
 }
 
 @media (max-width: 575.98px) {
+    .hero-row {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .hero-copy {
+        flex-basis: auto;
+        max-width: none;
+        width: 100%;
+    }
+
+    .hero-image {
+        flex-basis: auto;
+        width: 100%;
+        max-width: 100%;
+        max-height: 38vh;
+    }
+
     .cta-button {
         top: auto;
         bottom: max(1.25rem, env(safe-area-inset-bottom));
