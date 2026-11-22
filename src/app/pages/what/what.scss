@@ -611,10 +611,18 @@ h1 {
     }
 
     .cta-section {
+        flex-direction: column;
+        gap: 2.5rem;
         padding: 3rem 1rem;
     }
 
+    .cta-section>.section-heading {
+        width: 100%;
+        margin-inline: 0 !important;
+    }
+
     .cta-card {
+        width: min(650px, 100%);
         padding: 2rem 1.25rem;
     }
 
