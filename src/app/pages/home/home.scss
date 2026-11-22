@@ -1,3 +1,5 @@
+@use '../../../breakpoints' as *;
+
 .host-root {
     /* Container wrapper in case :host is not available in this scope */
 }
@@ -6,7 +8,6 @@
     display: block;
     position: relative;
     min-height: 100vh;
-    overflow: hidden;
 }
 
 .home-animation-root {
@@ -16,13 +17,12 @@
 }
 
 .home-content {
-    height: 70vh;
+    min-height: 50vh;
 }
 
 .hero-row {
-    flex: 1;
-    min-height: 0;
-    // align-items: center;
+    flex: 1 0 auto;
+    align-items: stretch;
     justify-content: flex-start;
     gap: clamp(1.5rem, 3vw, 3rem);
     padding: clamp(1.5rem, 4vw, 4rem);
@@ -55,11 +55,12 @@
 }
 
 .hero-image {
-    flex: 0 1 42%;
-    // width: 42%;
-    // max-width: 42%;
-    max-height: 100%;
-    object-fit: contain;
+    flex: 0 1 auto;
+    width: min(34vw, 90vh);
+    height: auto;
+    // aspect-ratio: 2.65 / 1;
+    align-self: flex-start;
+    object-fit: cover;
 }
 
 .audience-item {
@@ -174,7 +175,7 @@
     font-size: 1.05rem;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: $breakpoint-sm) {
     .hero-row {
         flex-direction: column;
         align-items: stretch;

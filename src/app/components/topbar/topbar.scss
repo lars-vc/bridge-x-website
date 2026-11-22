@@ -1,3 +1,5 @@
+@use '../../../breakpoints' as *;
+
 :host {
     display: block;
     position: fixed;
@@ -155,7 +157,7 @@
     color: var(--blue-pressed);
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: $breakpoint-sm) {
     .navbar {
         padding-inline: 0.75rem !important;
     }
