@@ -12,7 +12,7 @@ export class What implements AfterViewInit, OnDestroy {
   @ViewChildren('silverText') private silverTextElements!: QueryList<ElementRef<HTMLElement>>;
   @ViewChild('tileGrid') private tileGrid!: ElementRef<HTMLElement>;
 
-  readonly clarityLetters = Array.from("You can't improve what you can't see");
+  readonly clarityLetters = Array.from("You will improve once you see the invisible");
   readonly ambitionLetters = Array.from('A strategy that doesn\'t move is just a plan.');
   readonly transformationLetters = Array.from('We don\'t advise from the sidelines. We work alongside you.');
   readonly operatorLetters = Array.from('Experience that connects. Execution that delivers.');
