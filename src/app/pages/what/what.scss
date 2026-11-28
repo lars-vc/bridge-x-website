@@ -65,9 +65,12 @@ h1 {
     gap: clamp(2.5rem, 4vw, 5rem);
 }
 
-.ambition-content>.row,
 .ambition-content>section {
     width: min(100%, 75rem);
+}
+
+.ambition-content>.row {
+    width: min(100%, 80rem);
 }
 
 .offering-card {
@@ -191,7 +194,7 @@ h1 {
 
 .ticker__inner p {
     margin: 0 2rem;
-    font-size: 0.8vw;
+    font-size: clamp(0.875rem, 1vw, 1rem);
 }
 
 
@@ -265,20 +268,32 @@ h1 {
     background-color: var(--blue-pressed);
 }
 
+.flippable-square--blue-front .square-front {
+    background-color: var(--blue-pressed);
+    color: white;
+}
+
+.flippable-square--blue-front .square-back {
+    background-color: white;
+    color: var(--grafite);
+}
+
 .square-text-lg {
-    // color: white;
     font-size: 2vw;
     font-weight: 500;
 }
 
 .square-text-sm {
-    // color: white;
-    font-size: 0.6vw;
+    font-size: 0.7vw;
 }
 
 .square-text-back {
     color: white;
-    font-size: 0.6vw;
+    font-size: 0.7vw;
+}
+
+.flippable-square--blue-front .square-text-back {
+    color: var(--grafite);
 }
 
 .flip-image {
@@ -542,6 +557,18 @@ h1 {
     margin: 0;
     color: var(--silver);
     font-size: 0.875rem;
+}
+
+@media (max-width: ($breakpoint-lg )) {
+    .change-portrait {
+        aspect-ratio: 3 / 4;
+        min-height: 32rem;
+    }
+
+    .silver-text,
+    .what-button {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: $breakpoint-md) {

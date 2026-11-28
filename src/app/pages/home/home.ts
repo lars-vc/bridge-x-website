@@ -25,13 +25,19 @@ export class Home implements AfterViewInit, OnDestroy {
   public showCta = false;
   private rafId = 0;
   private start = 0;
+  private lastFrameTime: number | null = null;
+  private pixelRatio = 1;
+  private readonly animationSpeed = 2.5;
   private startOfXFormation = 1.5;
   private resizeHandler = () => this.onResize();
 
   private onResize(): void {
-    // this.resize(); // updates this.width/height and canvas size
-    // this.startOfXFormation = 0.5
-    // this.updateAmountAndNodes(true);
+    const previousAmount = this.amount;
+    this.resize();
+    this.updateAmountAndNodes();
+    if (this.amount === previousAmount) {
+      this.createXStructure();
+    }
   }
 
   private cssToRgba(cssColor: string, alpha = 1): string {
@@ -70,7 +76,7 @@ export class Home implements AfterViewInit, OnDestroy {
     const minDim = Math.min(this.width || window.innerWidth, this.height || window.innerHeight);
     const calculated = Math.round(minDim * 0.10); // scale factor: 0.25 * min dimension
     // return Math.max(this.minNodes, Math.min(this.maxNodes, calculated));
-    return this.width <= 575 ? 120 : 150;
+    return this.width <= 575 ? 100 : this.width <= 991 ? 110 : 120;
   }
 
   private updateAmountAndNodes(recreate = false): void {
@@ -113,19 +119,37 @@ export class Home implements AfterViewInit, OnDestroy {
 
   private resize(): void {
     const canvas = this.canvasRef.nativeElement;
-    this.width = canvas.width = window.innerWidth;
-    this.height = canvas.height = window.innerHeight;
+    const bounds = canvas.getBoundingClientRect();
+    this.width = bounds.width || window.innerWidth;
+    this.height = bounds.height || window.innerHeight;
+    this.pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+    const pixelWidth = Math.round(this.width * this.pixelRatio);
+    const pixelHeight = Math.round(this.height * this.pixelRatio);
+    if (canvas.width !== pixelWidth) canvas.width = pixelWidth;
+    if (canvas.height !== pixelHeight) canvas.height = pixelHeight;
+    this.ctx?.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
   }
 
   private createXStructure(): void {
-    const centerX = this.width * (this.width <= 575 ? 0.5 : 0.28);
-    const centerY = this.height * (this.width <= 575 ? 0.26 : 0.5);
+    const isCenteredLayout = this.width <= 576
+      || (this.height >= this.width && this.width <= 992);
+    const centerX = this.width * (isCenteredLayout ? 0.5 : 0.28);
+    const topbarHeight = document.querySelector('app-topbar')?.getBoundingClientRect().height ?? 0;
+    const contentHeight = this.height - topbarHeight;
+    const centerY = isCenteredLayout
+      ? topbarHeight + contentHeight * 0.26
+      : this.height * 0.5;
     const baseSpread = Math.min(this.width, this.height) * (this.width <= 575 ? 0.2 : 0.18);
     const xSpread = baseSpread * 0.9; // horizontal half-width (smaller)
     const ySpread = baseSpread * 1.4; // vertical half-height (taller) to look more like an 'X'
-    const thickness = Math.min(this.width, this.height) * (this.width <= 575 ? 0.035 : 0.06);
+    const thickness = Math.min(this.width, this.height) * (this.width <= 575 ? 0.03 : 0.06);
 
     const perSide = Math.ceil(this.amount / 2);
+    const offsets = Array.from(
+      { length: perSide },
+      () => (Math.random() - 0.5) * thickness,
+    );
 
     const xStart = centerX - xSpread;
     const xEnd = centerX + xSpread;
@@ -147,7 +171,7 @@ export class Home implements AfterViewInit, OnDestroy {
       const py = dxLine / len;  // perpendicular y
 
       // random offset along perpendicular to create thickness
-      const offset = (Math.random() - 0.5) * thickness;
+      const offset = offsets[sideIndex];
 
       node.tx = baseX + px * offset;
       node.ty = baseY + py * offset;
@@ -157,58 +181,62 @@ export class Home implements AfterViewInit, OnDestroy {
   private animate(time: number): void {
     if (!this.ctx) return;
     const ctx = this.ctx;
-    const seconds = (time - this.start) / 1000;
+    const animationTime = (time - this.start) * this.animationSpeed;
+    const seconds = animationTime / 1000;
+    const frameDeltaScale = this.lastFrameTime === null
+      ? 1
+      : Math.min(Math.max((time - this.lastFrameTime) / (1000 / 60), 0), 3);
+    const frameScale = frameDeltaScale * this.animationSpeed;
+    this.lastFrameTime = time;
 
     ctx.clearRect(0, 0, this.width, this.height);
 
     this.nodes.forEach((node) => {
       if (seconds < this.startOfXFormation) {
-        node.x += node.vx;
-        node.y += node.vy;
+        node.x += node.vx * frameScale;
+        node.y += node.vy * frameScale;
         if (node.x < 0 || node.x > this.width) node.vx *= -1;
         if (node.y < 0 || node.y > this.height) node.vy *= -1;
       }
 
       if (seconds >= this.startOfXFormation) {
         const force = Math.min((seconds - this.startOfXFormation) / this.startOfXFormation, 1);
-        node.x += (node.tx - node.x) * 0.01 * force;
-        node.y += (node.ty - node.y) * 0.01 * force;
-        node.x += Math.sin(time / 900 + node.offset) * 0.25;
-        node.y += Math.cos(time / 1100 + node.offset) * 0.25;
+        const easing = 1 - Math.pow(1 - 0.01 * force, frameScale);
+        node.x += (node.tx - node.x) * easing;
+        node.y += (node.ty - node.y) * easing;
+        node.x += Math.sin(time / 900 + node.offset) * 0.25 * frameDeltaScale;
+        node.y += Math.cos(time / 1100 + node.offset) * 0.25 * frameDeltaScale;
       }
     });
 
     const cssNode = getComputedStyle(document.documentElement).getPropertyValue('--node-color') || '';
-    // connections
+    const connectionDistance = this.width <= 575 ? 48 : this.width <= 991 ? 100 : 150;
+    const connectionDistanceSquared = connectionDistance * connectionDistance;
+    const pulse = 0.08 + (Math.sin(time / 800) + 1) * 0.04;
+    ctx.strokeStyle = this.cssToRgba(cssNode.trim(), pulse);
+
     for (let i = 0; i < this.nodes.length; i++) {
       const a = this.nodes[i];
       for (let j = i + 1; j < this.nodes.length; j++) {
         const b = this.nodes[j];
         const dx = a.x - b.x;
         const dy = a.y - b.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < (this.width <= 575 ? 48 : 150)) {
+        if (dx * dx + dy * dy < connectionDistanceSquared) {
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
-          const pulse = 0.08 + (Math.sin(time / 800) + 1) * 0.04;
-          // ctx.strokeStyle = `rgba(0,71,171,${pulse})`;
-          ctx.strokeStyle = this.cssToRgba(cssNode.trim(), pulse);
           ctx.stroke();
         }
       }
     }
 
-    // nodes
-    // determine node fill color from CSS variable (configurable)
-    const nodeFill = this.cssToRgba(cssNode.trim(), 0.85);
-
+    ctx.fillStyle = this.cssToRgba(cssNode.trim(), 0.85);
+    ctx.beginPath();
     this.nodes.forEach((node) => {
-      ctx.beginPath();
+      ctx.moveTo(node.x + node.size, node.y);
       ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-      ctx.fillStyle = nodeFill;
-      ctx.fill();
     });
+    ctx.fill();
 
     // Reveal legend sequence: text1, (arrow1+text2), (arrow2+text3)
     if (seconds > this.startOfXFormation + 0.6 && !this.shown1) {
